@@ -1,0 +1,8 @@
+1.redis安装
+	注意事项：
+		1.查找bind 127.0.0.1（可能有多处）改为 bind 0.0.0.0
+		2.密码：requirepass redis
+		3.保护模式protected-mode配置默认是yes 改为no
+
+		
+2.redis存对象时实体bean需要实现Serializable接口

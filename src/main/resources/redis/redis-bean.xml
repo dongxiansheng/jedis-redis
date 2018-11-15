@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd   
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd   
+	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd   
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	">
+	
+	<!-- Bean:交易开关管理类 -->
+	<bean id="redisSwitchManager" class="com.dhb.common.utils.redis.service.RedisSwitchManager">
+	    <!-- <ref name="jedisClientService">jedisClientServiceImpl</ref> -->
+	    <property name="jedisClientService" ref="jedisClientServiceImpl"></property>
+	</bean>
+	
+    <!--Bean:Jedis服务器对象 -->
+	<bean id="jedisClientServiceImpl" class="com.dhb.jedis.client.impl.JedisClientServiceImpl">
+		<!-- <ref name="jedisService">jedisService</ref>
+		<ref name="poolConfig">poolConfig</ref> -->
+		<property name="jedisService" ref="jedisService"></property>
+		<property name="poolConfig" ref="poolConfig"></property>
+	</bean>
+
+	<!--Bean:Jedis应用对象 -->
+	<bean id="jedisService" class="com.dhb.jedis.service.impl.JedisService">
+		<!-- <ref name="poolConfig">poolConfig</ref> -->
+		<property name="poolConfig" ref="poolConfig"></property>
+	</bean>
+
+	<!--Bean:Jedis服务配置-->
+	<bean id="poolConfig" class="com.dhb.jedis.service.impl.JedisPoolConfig">
+		<!-- <param name="configPath">/redis/redisConfig.properties</param> -->
+		<property name="configPath" value="/redis/redisConfig.properties"/>
+	</bean> 
+</beans>
