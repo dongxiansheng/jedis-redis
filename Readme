@@ -6,3 +6,5 @@
 
 		
 2.redis存对象时实体bean需要实现Serializable接口
+
+3.将此代码上传到github
